@@ -1,0 +1,6 @@
+git add dosya_adi.py
+git init
+git commit -m  //anlık görüntü
+git push
+
+  
