@@ -1,4 +1,20 @@
-<h1> Home Page</h1>
+<h1> AnAiScan</h1>
+<html lang="en">
+
+<body>
+    <!-- Menü dahil ediliyor -->
+    {% include 'changePage.html' %}
+</body>
+    
+{% if user.is_authenticated %}
+    <h3>Hi, {{ user.username }}!</h3>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Çıkış Yap</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Giriş Yap</a>
+{% endif %}
 
 <ul>
     {% for kategori in coins %}
@@ -11,3 +27,5 @@
         <p>{{ k }}</p>
     {% endfor %}
 </div>
+
+</html>

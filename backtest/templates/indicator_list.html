@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<body>
+    <!-- Menü dahil ediliyor -->
+    {% include 'changePage.html' %}
+</body>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicator List</title>
+</head>
+<body>
+    <h1>List of Indicators</h1>
+    
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Code</th>
+            <th>On Graph</th>
+        </tr>
+        {% for indicator in indicators %}
+        <tr>
+            <td>{{ indicator.name }}</td>
+            <td>{{ indicator.code }}</td>
+            <td>{{ indicator.on_graph }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No indicators found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="{% url 'indicator_create' %}">Create New Indicator</a>
+</body>
+</html>

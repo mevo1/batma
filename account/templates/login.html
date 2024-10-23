@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giriş Yap</title>
+</head>
+<body>
+    <h2>Giriş Yap</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    {% if form.errors %}
+        <p style="color: red;">Kullanıcı adı veya şifre hatalı!</p>
+    {% endif %}
+</body>
+</html>

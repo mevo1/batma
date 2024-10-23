@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .forms import MyForm
+from django.shortcuts import render, redirect
+from .forms import MyForm, IndicatorForm
+from .models import Indicator
 import yfinance as yf
 
 coinler = ["bitcoin","ethereum","pepe"]
@@ -43,3 +44,18 @@ def script(request):
         form = MyForm()
 
     return render(request, "script.html", {'form': form, 'output_text': output_text})
+
+def indicator_create(request):
+    if request.method == 'POST':
+        form = IndicatorForm(request.POST)
+        if form.is_valid():
+            form.save()  # Formu kaydet ve veritabanına ekle
+            return redirect('indicator_list')  # Form gönderildiğinde yönlendirme yapılacak bir sayfa
+    else:
+        form = IndicatorForm()
+
+    return render(request, 'indicator_form.html', {'form': form})
+
+def indicator_list(request):
+    indicators = Indicator.objects.all()  # Tüm Indicator kayıtlarını getir
+    return render(request, 'indicator_list.html', {'indicators': indicators})
