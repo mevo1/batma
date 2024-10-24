@@ -8,12 +8,6 @@
     
 {% if user.is_authenticated %}
     <h3>Hi, {{ user.username }}!</h3>
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Çıkış Yap</button>
-    </form>
-{% else %}
-    <a href="{% url 'login' %}">Giriş Yap</a>
 {% endif %}
 
 <ul>
