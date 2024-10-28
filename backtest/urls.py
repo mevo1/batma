@@ -10,7 +10,7 @@ urlpatterns = [
     path("", views.home),
     path("home", views.home, name = 'home'),
     path("backtest", views.backtest, name = 'backtest'),
-    path("showData", views.showData, name = 'showData'),
+    path("", views.showData, name = 'showData'),
     path("script", views.script, name = 'script' ),
     path('indicator_create', views.indicator_create, name='indicator_create'),
     path('list', views.indicator_list, name='indicator_list')
