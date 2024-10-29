@@ -49,18 +49,14 @@ def script(request):
 def indicator_create(request):
     
     if request.method == 'POST':
-        form = IndicatorForm(request.POST)
-        print("a")
-        print(form.is_valid())
-        print("b")
+        form = IndicatorForm(request.POST, initial={'user': request.user})  # Pass the user in initial data
         if form.is_valid():
-            
             indicator = form.save(commit=False)
             indicator.user = request.user  # İndikatörü oluşturan kullanıcıyı ekle
             indicator.save()
             return redirect('indicator_list') # Form gönderildiğinde yönlendirme yapılacak bir sayfa
     else:
-        form = IndicatorForm()
+        form = IndicatorForm(initial={'user': request.user})
 
     return render(request, 'indicator_form.html', {'form': form})
 
