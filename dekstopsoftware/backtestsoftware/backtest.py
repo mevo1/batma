@@ -1,7 +1,12 @@
 import sqlite3
+import sys
+from pathlib import Path
 
-# Veritabanı dosyasının yolunu belirtin
-db_path = 'D:/InvestProjectSession1/djangoProject/investapp/db.sqlite3'
+# Üst dizine erişim sağlama
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+# variables.py dosyasından db_path'i içeri aktarma
+from variables import db_path
 
 # Veritabanına bağlanma
 conn = sqlite3.connect(db_path)
