@@ -12,14 +12,24 @@ from variables import db_path
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-# 'backtest_indicator' tablosundaki tüm verileri çekme
-cursor.execute("SELECT * FROM backtest_indicator WHERE user_id = 3")
-veriler = cursor.fetchall()
+# 'backtest_strategy' tablosunda 'code' sütunundaki verileri çekme
+cursor.execute("SELECT code FROM backtest_strategy WHERE user_id = 3")
+codes = cursor.fetchall()
 
-# Verileri yazdırma
-for veri in veriler:
-    print(veri)
+# 'codes' listesi içinde tek sütun olduğundan veri[0] olarak yazdırabiliriz
+for code in codes:
+    user_code = code[0]
+    #print(code[0])
 
+print(user_code)
 
 # Bağlantıyı kapatma
 conn.close()
+
+
+def execute_user_code(user_code, data):
+    # user_code: Kullanıcının yazdığı strateji kodu (string formatında)
+    local_vars = {"data": data}
+    exec(user_code, {}, local_vars)
+    strategy_instance = local_vars["UserStrategy"](data)  # Kullanıcı strateji sınıfı örneği
+    return strategy_instance.generate_signals()

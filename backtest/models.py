@@ -13,8 +13,17 @@ class Indicator(models.Model):
         return self.name
     
 class Strategy(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     code = models.TextField()
+    ilkmarj = models.IntegerField()
+    emirorani = models.FloatField()
+    karal = models.FloatField()
+    zarardurdur = models.FloatField()
+    komisyon = models.FloatField()
+    islemertele = models.IntegerField()
+    optlimi = models.BooleanField(default=False)
+    cevapvarmi = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
