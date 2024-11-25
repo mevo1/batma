@@ -11,20 +11,27 @@ def strategy(data):
     # Basit bir strateji: Fiyat 50 günlük ortalamanın üstünde ise satın al
     data['50_MA'] = data['Close'].rolling(window=50).mean()
     data['Signal'] = 0
-    data.loc[data['Close'] > data['50_MA'], 'Signal'] = 1
+    data.loc[data['Close'] > data['50_MA'], 'Signal'] = 0.2
+    data['100_MA'] = data['Close'].rolling(window=100).mean()
+    data.loc[data['Close'] > data['100_MA'], 'Signal'] = 0.1
     return data
 """
 
 exec(user_code)  # Güvenlik kontrolünden sonra kodu çalıştırın
+
+import pandas as pd
+
+
+pd.set_option('display.max_rows', None)
 
 
 import pandas as pd
 from datetime import datetime
 
 # Kullanıcı fonksiyonlarını çağırma
-symbol = "AAPL"
-start_date = "2022-01-01"
-end_date = "2023-01-01"
+symbol = "BTC-USD"
+start_date = "2024-01-01"
+end_date = "2024-11-01"
 
 # Kullanıcıdan veri çek
 data = fetch_data(symbol, start_date, end_date)
@@ -39,4 +46,9 @@ backtest_data['Strategy_Returns'] = backtest_data['Position'] * backtest_data['R
 
 # Toplam kar/zarar
 total_return = (1 + backtest_data['Strategy_Returns']).cumprod().iloc[-1]
+
+print(backtest_data['Position'])
+print(backtest_data['Strategy_Returns'])
+
+
 print("Toplam Getiri:", total_return)
