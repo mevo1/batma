@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #f4f4f4;
+  }
+  
+  header .logo h1 {
+    font-size: 1.5rem;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 1rem;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .auth-buttons button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #007bff;
+    color: hsl(0, 0%, 98%);
+    cursor: pointer;
+  }
+  
+  .auth-buttons button:hover {
+    background: #0056b3;
+  }
+  
+  main {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-placeholder {
+    width: 80%;
+    height: 200px;
+    border: 2px dashed #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .content ul {
+    list-style: none;
+    margin-bottom: 1rem;
+  }
+  
+  .content ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .features ul {
+    list-style: none;
+    margin-top: 2rem;
+  }
+  
+  .features ul li {
+    margin-bottom: 0.5rem;
+  }
+  
+  footer {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  footer .contact button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  footer .contact button:hover {
+    background: #0056b3;
+  }
+  
