@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anasayfa</title>
-  <link rel="stylesheet" href="deneme.css">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/deneme.css' %}">
 </head>
 <body>
   <div class="container">
@@ -12,7 +13,7 @@
     <div class="sidebar">
       <div class="profile">
         <div class="avatar"></div>
-        <p>#userr0085852800</p>
+        <p>#{{ user.id }}</p>
       </div>
       <ul class="menu">
         <li><a href="mainmenu.html">Anasayfa</a></li>
@@ -29,8 +30,8 @@
     <div class="main-content">
       <div class="header">
         <div class="user-info">
-          <h2>Bilal Bostan</h2>
-          <p>xxxxxx@gmail.com</p>
+          <h2>{{user.first_name}} {{user.last_name}}</h2>  
+          <p>{{user.email}}</p>
         </div>
         <div class="stats">
           <div>1 strateji</div>
