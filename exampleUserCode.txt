@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 def strategy(data):
     # Basit bir strateji: Fiyat 50 günlük ortalamanın üstünde ise satın al
     data['50_MA'] = data['Close'].rolling(window=50).mean()
@@ -5,4 +6,13 @@ def strategy(data):
     data.loc[data['Close'] > data['50_MA'], 'Signal'] = 0.2
     data['100_MA'] = data['Close'].rolling(window=100).mean()
     data.loc[data['Close'] > data['100_MA'], 'Signal'] = 0.1
+=======
+def strategy(data):
+    # Basit bir strateji: Fiyat 50 günlük ortalamanın üstünde ise satın al
+    data['50_MA'] = data['Close'].rolling(window=50).mean()
+    data['Signal'] = 0
+    data.loc[data['Close'] > data['50_MA'], 'Signal'] = 0.2
+    data['100_MA'] = data['Close'].rolling(window=100).mean()
+    data.loc[data['Close'] > data['100_MA'], 'Signal'] = 0.1
+>>>>>>> a4575a6f8bbbcdc0233cfa926829b21f84124b66
     return data
