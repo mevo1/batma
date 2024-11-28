@@ -15,7 +15,8 @@ def sum_position(backtest_dict, row_count): # POZİSYON DEĞERLERİNİ TOPLAMA
     return sum_position
 
 def position_filter(sum_position):
-    sum_position["sum_position"] = sum_position["sum_position"].where(sum_position["sum_position"] > 1, 0)
+    sum_position["sum_position"] = sum_position["sum_position"].where(
+    (sum_position["sum_position"] > 1) | (sum_position["sum_position"] < -1), 0)
     return sum_position
 
 
