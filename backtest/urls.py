@@ -13,5 +13,7 @@ urlpatterns = [
     path("", views.showData, name = 'showData'),
     path("script", views.script, name = 'script' ),
     path('indicator_create', views.indicator_create, name='indicator_create'),
-    path('list', views.indicator_list, name='indicator_list')
+    path('list', views.indicator_list, name='indicator_list'),
+    path('ozellikler', views.ozellikler_sayfasi, name='ozellikler'),
+    path('mainmenu', views.mainmenu, name='mainmenu'),
 ]
