@@ -11,8 +11,8 @@ body {
   
   /* Sol Menü */
   .sidebar {
-    width: 20%;
-    background-color: hwb(207 12% 38%);
+    width: 15%;
+    background-color: hwb(207 12% 25%);
     color: hwb(0 100% 0%);
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -262,3 +262,4 @@ body {
   .hidden {
     display: none;
   }
+

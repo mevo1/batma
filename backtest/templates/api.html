@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Hesabını Bağla</title>
+   
+    
+</head>
+<body>
+  {% load static %}
+  
+    <div class="container">
+    <div class="sidebar">
+        <div class="profile">
+          <div class="avatar"></div>
+          <p>#userr0085852800</p>
+          {% include 'leftmenu.html' %}
+      <div class="main-content">
+        <div class="header">
+          <h2>API Bağlantı Paneli</h2>
+        </div>
+  
+        <div class="content">
+          <div class="strategies">
+            <h3>Kripto hesabınızın API adresini girin</h3>
+            <form>
+              <input type="text" id="apiAddress" name="apiAddress" placeholder="API adresinizi buraya yazın" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+              <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Bağla</button>
+            </form>
+  
+            <div style="text-align: center; margin-top: 20px;">
+              <div style="font-size: 50px; color: green; text-align: center;">✔️</div>
+              <p>Hesabın bağlandı</p>
+            </div>
+            
+  
+            <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+              <a href="strategy">
+                <button style="padding: 10px 15px; background-color: #008CBA; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                  Hemen strateji oluştur
+                </button>
+              </a>
+              
+              <button style="padding: 10px 15px; background-color: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer;">Bağlantıyı kes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

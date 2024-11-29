@@ -10,11 +10,15 @@ urlpatterns = [
     path("", views.home),
     path("home", views.home, name = 'home'),
     path("backtest", views.backtest, name = 'backtest'),
-    path("", views.showData, name = 'showData'),
-    path("script", views.script, name = 'script' ),
-    path('indicator_create', views.indicator_create, name='indicator_create'),
-    path('list', views.indicator_list, name='indicator_list'),
-    path('ozellikler', views.ozellikler_sayfasi, name='ozellikler'),
     path('mainmenu', views.mainmenu, name='mainmenu'),
     path('strategy', views.strategy, name='strategy'),
+    path('leftmenu', views.leftmenu, name='leftmenu'),
+    path('api', views.api, name='api'),
+    path('workingbot', views.workingbot, name='workingbot'),
+    path('sift', views.sift, name='sift'),
+    path('community', views.community, name='community'),
+    path('indicator', views.indicator, name='indicator'),
+    path('logout', views.logout, name=''),
+    
+    
 ]

@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    height: 100vh; /* Consistent height definition */
+}
+
+.container2 {
+    display: flex;
+    align-items: right;
+    width: 50%; /* Ensure it spans the full width */
+}
+
+.sidebar2 {
+    width: 25%;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content1 {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.charts1 {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.chart1 {
+    width: 45%; /* Adjusted to fit two charts side by side */
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.control-panel1 {
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    background-color: #f8f8f8;
+    margin-top: 20px; /* Adjust spacing between elements */
+}
+
+.control-panel1 h3 {
+    margin-top: 0;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+form select,
+form button {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+}

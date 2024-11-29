@@ -4,34 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anasayfa</title>
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/deneme.css' %}">
+  
 </head>
 <body>
-  <div class="container">
+  {% load static %}
+ 
     <!-- Sol Menü -->
+  <div class="container">
     <div class="sidebar">
       <div class="profile">
         <div class="avatar"></div>
-        <p>#{{ user.id }}</p>
-      </div>
-      <ul class="menu">
-        <li><a href="mainmenu.html">Anasayfa</a></li>
-        <li><a href="api.html">API ile kripto hesabını bağla</a></li>
-        <li><a href="strategy.html">Strateji oluştur</a></li>
-        <li><a href="backtest.html">Backtest</a></li>
-        <li><a href="workingbot.html">Bot çalıştırma</a></li>
-        <li><a href="sift.html">Strateji taraması</a></li>
-        <li><a href="community.html">Topluluk</a></li>
-      </ul>
-    </div>
+        <p>#userr0085852800</p>
+        {% include 'leftmenu.html' %}
 
     <!-- Ana İçerik -->
     <div class="main-content">
       <div class="header">
         <div class="user-info">
-          <h2>{{user.first_name}} {{user.last_name}}</h2>  
-          <p>{{user.email}}</p>
+          <h2>Bilal Bostan</h2>
+          <p>xxxxxx@gmail.com</p>
         </div>
         <div class="stats">
           <div>1 strateji</div>

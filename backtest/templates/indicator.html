@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicator</title>
+    <link rel="stylesheet" href="deneme.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #chart-container {
+            height: 60vh;
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+  {% load static %}
+  
+    <div class="container">
+    <div class="sidebar">
+        <div class="profile">
+          <div class="avatar"></div>
+          <p>#userr0085852800</p>
+          {% include 'leftmenu.html' %}
+      <div id="tools">
+    </div>
+    <div id="chart-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.0.0/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="indicator.js"></script>
+</body>
+</html>
