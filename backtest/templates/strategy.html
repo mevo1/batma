@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strateji Oluşturma</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/strategy.css' %}">
+    <link rel="stylesheet" href="{% static 'css/deneme.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile">
+                <div class="avatar"></div>
+                <p>#userr0085852800</p>
+            </div>
+            <ul class="menu">
+                <li><a href="mainmenu.html">Anasayfa</a></li>
+                <li><a href="api.html">API ile kripto hesabını bağla</a></li>
+                <li><a href="strategy.html">Strateji oluştur</a></li>
+                <li><a href="backtest.html">Backtest</a></li>
+                <li><a href="workingbot.html">Bot çalıştırma</a></li>
+                <li><a href="sift.html">Strateji taraması</a></li>
+                <li><a href="community.html">Topluluk</a></li>
+                <li><a href="indicator.html">Indicator</a></li>
+            </ul>
+        </div>
+        <div id="container1">
+            <div id="editor1">
+                <form method="POST" id="strategy-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}  <!-- Django formu burada -->
+                    <button type="submit" id="save-btn">Kaydet</button>
+                </form>
+            </div>
+            <div id="sidebar1">
+                <h3>Stratejilerim</h3>
+                <div id="strategies">
+                    {% for strategy in strategies %}
+                        <p>{{ strategy.name }}</p>  <!-- Stratejileri listeliyoruz -->
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/strategy.js' %}"></script>
+</body>
+</html>

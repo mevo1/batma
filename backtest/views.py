@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import MyForm, IndicatorForm
-from .models import Indicator
+from .forms import MyForm, IndicatorForm,StrategyForm
+from .models import Indicator,Strategy
 from django.http import HttpResponseForbidden
 from django.contrib.auth.models import User
 import yfinance as yf
@@ -79,3 +79,18 @@ def mainmenu(request):
         'user': user,
     }
     return render (request, 'mainmenu.html', context)
+
+def strategy(request):
+    if request.method == 'POST':
+        form = StrategyForm(request.POST)
+        if form.is_valid():
+            form.save()  # Veri tabanına kaydediyoruz
+            return redirect('strategy')  # Başarılı olursa tekrar aynı sayfaya dön
+    else:
+        form = StrategyForm()
+    
+    # Tüm stratejileri listelemek için
+    strategies = Strategy.objects.all()
+    
+    return render(request, 'strategy.html', {'form': form, 'strategies': strategies})
+

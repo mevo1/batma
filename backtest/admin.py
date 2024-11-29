@@ -6,4 +6,5 @@ admin.site.register(Indicator)
 
 admin.site.register(Strategy)
 
+
 # Register your models here.
