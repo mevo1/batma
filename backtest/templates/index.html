@@ -3,122 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        header {
-            background-color: #F0EEEE;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #f4f4f4;
-            padding: 1rem;
-        }
-
-        nav a {
-            margin: 0 1rem;
-            color: #333;
-            text-decoration: none;
-        }
-
-        nav a:hover {
-            color: #007bff;
-        }
-
-        main {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .grid {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 2rem;
-        }
-
-        .grid-item {
-            width: 900px;
-            height: 450px;
-            background-color: #f0f0f0;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .grid-item:hover {
-            transform: scale(1.1) rotate(1deg);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            animation: wave 0.6s ease infinite alternate;
-        }
-
-        @keyframes wave {
-            0% { transform: scale(1.1) rotate(1deg); }
-            100% { transform: scale(1.1) rotate(-1deg); }
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    <title>Kripto Yatırım</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-
 <body>
-    <header>
-        <h1>Home</h1>
-    </header>
-
-    <nav>
-        <a href="{% url 'home' %}">Home</a>
-        <a href="{% url 'backtest' %}">BackTest</a>
-        <a href="{% url 'showData' %}">ShowData</a>
-        <a href="{% url 'script' %}">Script</a>
-        <a href="{% url 'login' %}">Ahmet</a>
-        <a href="{% url 'indicator_create' %}">Indicator_create</a>
-    
-    </nav>
-
-    <main>
-        <h2>Welcome to our website!</h2>
-        <p>Crypto Trade</p>
-
-        <div class="grid">
-            <div class="grid-item">Icon 1</div>
-            <div class="grid-item">Icon 2</div>
-            <div class="grid-item">Icon 3</div>
-            <div class="grid-item">Icon 4</div>
-            <div class="grid-item">Icon 5</div>
-            <div class="grid-item">Icon 6</div>
-            <div class="grid-item">Icon 7</div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'ozellikler' %}">Özellikler</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Nasıl Kullanılır?</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ücretlendirme</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Hakkında</a></li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Giriş Yap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Kayıt Ol</a></li>
+                </ul>
+            </div>
         </div>
-    </main>
-
-    <footer>
-        <p>&copy; İletişim : aiscan@aiscan.com </p>
-    </footer>
-
+    </nav>
+    <div class="container text-center mt-5">
+        <h1>Kripto Yatırımlarınızı Optimize Edin</h1>
+        <p>Oluşturduğunuz stratejileri test edin ve performansınızı artırın.</p>
+        <a class="btn btn-primary" href="#">Şimdi Başla</a>
+    </div>
 </body>
 </html>

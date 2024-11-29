@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import MyForm, IndicatorForm
 from .models import Indicator
 from django.http import HttpResponseForbidden
+from django.contrib.auth.models import User
 import yfinance as yf
 
 coinler = ["bitcoin","ethereum","pepe"]
@@ -68,3 +69,13 @@ def edit_indicator(request, indicator_id):
     indicator = Indicator.objects.get(id=indicator_id)
     if indicator.user != request.user:
         return HttpResponseForbidden()
+
+def ozellikler_sayfasi(request):
+    return render (request, 'ozellikler.html')
+
+def mainmenu(request):
+    user = User.objects.get(username = 'bilal_bostan')
+    context = {
+        'user': user,
+    }
+    return render (request, 'mainmenu.html', context)
