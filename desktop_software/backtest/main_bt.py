@@ -4,39 +4,44 @@ from datetime import datetime
 from position_operate import *
 from position_change_list import *
 from procedure import *
+from stops_bt import *
+from moving_bt import *
 pd.set_option('display.max_rows', None)
 
 # Seçili (indirilmesi gereken) verileri indirme.
 symbols = {"BTC-USD","ETC-USD","DOGE-USD"}#,"ETH-USD","XRP-USD"
-start_date = "2024-10-15"   
-end_date = "2024-11-28"
+start_date = "2024-09-28"   
+end_date = "2024-10-28"
 interval = "1d"
+take_profit = "KarAl"
+stop_lose = "ZararDurdur"
+moving_tp = True
+moving_sl = True
+commission = 0.001
 
 # Verileri saklamak için dictionary
 data_dict = {}
 backtest_dict = {}
 ticker_list = list(symbols)
 
-def fetch_data(symbol, start_date, end_date):
+def fetch_data(symbol, start_date, end_date,interval):
     # Yahoo Finance API'den veri çekme
-    data = yf.download(symbol, start=start_date, end=end_date, interval=interval)
+    data = yf.download(symbol, start=start_date,end=end_date, interval=interval)
     return data
 
 # Kullanının kodunu al.
 user_code = """
 def strategy(data):
     data['30_MA'] = data['Close'].rolling(window=5).mean()
-    data['100_MA'] = data['Close'].rolling(window=100).mean()
     
-    data['KarAl'] = 10
-    data.loc[data['Close'] > data['30_MA'], 'KarAl'] = 3
-    data['ZararDur'] = 10
-    data.loc[data['Close'] > data['30_MA'], 'ZararDur'] = 4
+    data['KarAl'] = 0
+    data.loc[data['Close'] > data['30_MA'], 'KarAl'] = 0
+    data['ZararDur'] = 5
+    data.loc[data['Close'] > data['30_MA'], 'ZararDur'] = 5
 
     data['Signal'] = 0
     data['Signal'] = data['Signal'].astype("float64")
-    data.loc[data['Close'] > data['30_MA'], 'Signal'] = -0.65
-    data.loc[data['Close'] > data['100_MA'], 'Signal'] = -0.52    
+    data.loc[data['Close'] > data['30_MA'], 'Signal'] = 0.25 
     return data
 """
 
@@ -44,7 +49,7 @@ exec(user_code)  # Kullanıcı kodunu çalıştır.
 
 for symbol in symbols: # indirme ve kodu çalıştırma işlemleri
     # Veri indirme
-    data_dict[symbol] = fetch_data(symbol, start_date, end_date)
+    data_dict[symbol] = fetch_data(symbol, start_date, end_date, interval)
     
     # Strateji uygulama
     backtest_dict[symbol] = strategy(data_dict[symbol])
@@ -65,6 +70,7 @@ merged_df1 = pd.concat(
     axis=1,
     sort=False
 )
+
 #print(merged_df1)
 
 i = 0
@@ -94,23 +100,32 @@ merged_df2 = pd.concat(
 
 merged_df = pd.concat([merged_df1, merged_df2], axis=1)
 
-print(merged_df)
-
-# ts/sl kontrolü
-
-
-
 totals = 0
 
 for symbol in symbols:
-    backtest_dict[symbol]['Returns'] = backtest_dict[symbol]['Close'].pct_change()
-    backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns'])
+    backtest_dict[symbol]['Returns'] = backtest_dict[symbol]['Open'].pct_change()
+    backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
+    
+    if moving_tp == True or moving_sl == True:
+        if moving_tp == True and "KarAl" not in backtest_dict[symbol].columns:
+            print("Kar Al Kolonunuz Yok")
+        if moving_sl == True and "ZararDur" not in backtest_dict[symbol].columns:
+            print("Zarar Durdur Kolonunuz Yok")
+
+        backtest_dict[symbol] = main_moving(backtest_dict[symbol])
+
+    # Ts/Sl
+    elif "KarAl" in backtest_dict[symbol].columns or "ZararDur" in backtest_dict[symbol].columns:
+        backtest_dict[symbol]['Position'] = main_stops(backtest_dict[symbol])
+        backtest_dict[symbol]['Position'] = backtest_dict[symbol]['Position'].fillna(0)
+        backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
 
     total_return = (1+ backtest_dict[symbol]['Strategy_Returns']).cumprod().iloc[-1]
     totals += (total_return-1)
-    #print(symbol, "Getiri:", total_return)
 
-#print("Toplam Getiri:", totals+1)
+    print(symbol, "Getiri:", total_return)
+
+print("Toplam Getiri:", totals+1)
 
 
 

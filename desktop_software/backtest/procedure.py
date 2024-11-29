@@ -14,49 +14,39 @@ def procedure(backtest_dict,position_change_list,i):
     position_list1 = list(position_list01)
     position_list2 = list(position_list02)
 
-    print("ilk")
-    print(position_list1)
-    print(position_list2)
-
     position_diff = 1
 
     for k in range(len(backtest_dict)): # alım miktarını % 100 ile sınırlama
-        print(position_diff)
         if(position_diff != 0):
             if (position_list1[k]==position_list2[k]):
-                if(position_diff<position_list2[k]):
-                    position_list2[k]=position_diff
+                if(position_diff<abs(position_list2[k])):
+                    if(position_list2[k]<0):
+                        position_list2[k]= (-1) * position_diff
+                    else:
+                        position_list2[k]=position_diff
                     position_diff = 0.0
                 else:
-                    if position_list2[k]<0:
-                        position_diff = position_diff + position_list2[k]
-                    else:
-                        position_diff = position_diff - position_list2[k]
-
+                    position_diff = position_diff - abs(position_list2[k])
             elif(position_list1[k]>position_list2[k]):
-                if(position_diff<position_list2[k]):
-                    position_list2[k]=position_diff
+                if(position_diff<abs(position_list2[k])):
+                    if(position_list2[k]<0):
+                        position_list2[k]= (-1) * position_diff
+                    else:
+                        position_list2[k]=position_diff
                     position_diff = 0.0
                 else:
-                    if position_list2[k]<0:
-                        position_diff = position_diff + position_list2[k]
-                    else:
-                        position_diff = position_diff - position_list2[k]
+                    position_diff = position_diff - abs(position_list2[k])
             elif(position_list1[k]<position_list2[k]):
-                if(position_diff<position_list2[k]):
-                    position_list2[k]=position_diff
+                if(position_diff<abs(position_list2[k])):
+                    if(position_list2[k]<0):
+                        position_list2[k]= (-1) * position_diff
+                    else:
+                        position_list2[k]=position_diff
                     position_diff = 0.0
                 else:
-                    if position_list2[k]<0:
-                        position_diff = position_diff + position_list2[k]
-                    else:
-                        position_diff = position_diff - position_list2[k]
+                    position_diff = position_diff - abs(position_list2[k])
         else:
             position_list2[k] = 0.0
-
-    print("son")
-    print(position_list1)
-    print(position_list2)
 
     while(True): # verileri dictionarye yerleştirme.
         for k in range(len(backtest_dict)):
