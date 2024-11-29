@@ -16,4 +16,5 @@ urlpatterns = [
     path('list', views.indicator_list, name='indicator_list'),
     path('ozellikler', views.ozellikler_sayfasi, name='ozellikler'),
     path('mainmenu', views.mainmenu, name='mainmenu'),
+    path('strategy', views.strategy, name='strategy'),
 ]

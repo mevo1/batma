@@ -79,3 +79,7 @@ def mainmenu(request):
         'user': user,
     }
     return render (request, 'mainmenu.html', context)
+
+
+def strategy(request):
+    return render(request, "strategy.html")
