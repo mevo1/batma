@@ -8,16 +8,7 @@ from stops_bt import *
 from moving_bt import *
 pd.set_option('display.max_rows', None)
 
-# Seçili (indirilmesi gereken) verileri indirme.
-symbols = {"BTC-USD","ETC-USD","DOGE-USD"}#,"ETH-USD","XRP-USD"
-start_date = "2024-09-28"   
-end_date = "2024-10-28"
-interval = "1d"
-take_profit = "KarAl"
-stop_lose = "ZararDurdur"
-moving_tp = True
-moving_sl = True
-commission = 0.001
+from pull_data_bt import symbols, start_date, end_date, interval, moving_tp, moving_sl, commission, user_code
 
 # Verileri saklamak için dictionary
 data_dict = {}
@@ -28,22 +19,6 @@ def fetch_data(symbol, start_date, end_date,interval):
     # Yahoo Finance API'den veri çekme
     data = yf.download(symbol, start=start_date,end=end_date, interval=interval)
     return data
-
-# Kullanının kodunu al.
-user_code = """
-def strategy(data):
-    data['30_MA'] = data['Close'].rolling(window=5).mean()
-    
-    data['KarAl'] = 0
-    data.loc[data['Close'] > data['30_MA'], 'KarAl'] = 0
-    data['ZararDur'] = 5
-    data.loc[data['Close'] > data['30_MA'], 'ZararDur'] = 5
-
-    data['Signal'] = 0
-    data['Signal'] = data['Signal'].astype("float64")
-    data.loc[data['Close'] > data['30_MA'], 'Signal'] = 0.25 
-    return data
-"""
 
 exec(user_code)  # Kullanıcı kodunu çalıştır.
 
