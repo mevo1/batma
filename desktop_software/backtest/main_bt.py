@@ -8,6 +8,7 @@ from stops_bt import *
 from moving_bt import *
 pd.set_option('display.max_rows', None)
 
+# data baseden veri çekme
 from pull_data_bt import symbols, start_date, end_date, interval, moving_tp, moving_sl, commission, user_code
 
 # Verileri saklamak için dictionary
@@ -16,7 +17,6 @@ backtest_dict = {}
 ticker_list = list(symbols)
 
 def fetch_data(symbol, start_date, end_date,interval):
-    # Yahoo Finance API'den veri çekme
     data = yf.download(symbol, start=start_date,end=end_date, interval=interval)
     return data
 
@@ -81,26 +81,26 @@ for symbol in symbols:
     backtest_dict[symbol]['Returns'] = backtest_dict[symbol]['Open'].pct_change()
     backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
     
-    if moving_tp == True or moving_sl == True:
+    # Tp / Sl
+    if "KarAl" in backtest_dict[symbol].columns or "ZararDur" in backtest_dict[symbol].columns:
         if moving_tp == True and "KarAl" not in backtest_dict[symbol].columns:
             print("Kar Al Kolonunuz Yok")
-        if moving_sl == True and "ZararDur" not in backtest_dict[symbol].columns:
+        elif moving_sl == True and "ZararDur" not in backtest_dict[symbol].columns:
             print("Zarar Durdur Kolonunuz Yok")
+        # Code
+        else:
+            backtest_dict[symbol] = main_moving(backtest_dict[symbol], moving_tp, moving_sl)
 
-        backtest_dict[symbol] = main_moving(backtest_dict[symbol])
-
-    # Ts/Sl
-    elif "KarAl" in backtest_dict[symbol].columns or "ZararDur" in backtest_dict[symbol].columns:
-        backtest_dict[symbol]['Position'] = main_stops(backtest_dict[symbol])
-        backtest_dict[symbol]['Position'] = backtest_dict[symbol]['Position'].fillna(0)
-        backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
+    backtest_dict[symbol]['Position'] = backtest_dict[symbol]['Position'].fillna(0)
+    backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
 
     total_return = (1+ backtest_dict[symbol]['Strategy_Returns']).cumprod().iloc[-1]
-    totals += (total_return-1)
+    
+    totals = totals + total_return
 
     print(symbol, "Getiri:", total_return)
 
-print("Toplam Getiri:", totals+1)
+print("Toplam Getiri:", totals/len(symbols))
 
 
 
