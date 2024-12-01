@@ -2,9 +2,6 @@ import pandas as pd
 import numpy as np
 
 def main_moving(df, moving_tp, moving_sl):
-    # ilk alım noktalarını belirlemek için gruplandırma yap.
-    df["Dependency"] = df["Position"].fillna(0) != 0
-    df["Group"] = (df["Dependency"] != df["Dependency"].shift()).cumsum() * df["Dependency"]
     
     # Returnsları grouplara ayırma.
     grouped = df.groupby("Group")["Returns"]
@@ -53,7 +50,7 @@ def main_moving(df, moving_tp, moving_sl):
     #merged = pd.concat([df["Position"],df["Dependency"],df["Returns"],df["KarAl"],df["ZararDur"],df["Group"],df["Close"],df["Cumprod"],df["Cumprod_ls"],df["Cumprod_tp"]], axis=1)
     #print(merged)
 
-    df = df.drop(columns=["Dependency","Group","Cumprod"])
+    df = df.drop(columns=["Dependency"])
 
     return df
 

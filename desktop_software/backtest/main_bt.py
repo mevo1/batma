@@ -6,10 +6,12 @@ from position_change_list import *
 from procedure import *
 from stops_bt import *
 from moving_bt import *
+from result import *
 pd.set_option('display.max_rows', None)
+pd.set_option('display.max_columns', None)
 
 # data baseden veri çekme
-from pull_data_bt import symbols, start_date, end_date, interval, moving_tp, moving_sl, commission, user_code
+from pull_data_bt import symbols, start_date, end_date, interval, moving_tp, moving_sl, commission, user_code, first_margin
 
 # Verileri saklamak için dictionary
 data_dict = {}
@@ -17,7 +19,7 @@ backtest_dict = {}
 ticker_list = list(symbols)
 
 def fetch_data(symbol, start_date, end_date,interval):
-    data = yf.download(symbol, start=start_date,end=end_date, interval=interval)
+    data = yf.download(symbol, start=start_date,end=end_date, interval=interval, progress=False)
     return data
 
 exec(user_code)  # Kullanıcı kodunu çalıştır.
@@ -66,7 +68,6 @@ while i < len(filted_sum_position["sum_position"]) - 1:
             print(f"An unexpected error occurred: {e}")
             break
         
-
 merged_df2 = pd.concat(
     [backtest_dict[ticker]["Position"].rename(ticker) for ticker in ticker_list], 
     axis=1,
@@ -81,26 +82,34 @@ for symbol in symbols:
     backtest_dict[symbol]['Returns'] = backtest_dict[symbol]['Open'].pct_change()
     backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
     
+    # ilk alım noktalarını belirlemek için gruplandırma yap.
+    backtest_dict[symbol]["Dependency"] = backtest_dict[symbol]["Position"].fillna(0) != 0
+    backtest_dict[symbol]["Group"] = (backtest_dict[symbol]["Dependency"] != backtest_dict[symbol]["Dependency"].shift()).cumsum() * backtest_dict[symbol]["Dependency"]
+
     # Tp / Sl
     if "KarAl" in backtest_dict[symbol].columns or "ZararDur" in backtest_dict[symbol].columns:
-        if moving_tp == True and "KarAl" not in backtest_dict[symbol].columns:
-            print("Kar Al Kolonunuz Yok")
-        elif moving_sl == True and "ZararDur" not in backtest_dict[symbol].columns:
-            print("Zarar Durdur Kolonunuz Yok")
+        if moving_sl == True and "ZararDur" not in backtest_dict[symbol].columns or moving_tp == True and "KarAl" not in backtest_dict[symbol].columns:
+            if moving_sl == True and "ZararDur" not in backtest_dict[symbol].columns:
+                print("Zarar durdur değeri yok")
+            if moving_tp == True and "KarAl" not in backtest_dict[symbol].columns:
+                print("Kar al değeri yok")
         # Code
         else:
             backtest_dict[symbol] = main_moving(backtest_dict[symbol], moving_tp, moving_sl)
 
     backtest_dict[symbol]['Position'] = backtest_dict[symbol]['Position'].fillna(0)
     backtest_dict[symbol]['Strategy_Returns'] = (backtest_dict[symbol]['Position'] * backtest_dict[symbol]['Returns']) - (commission * abs(backtest_dict[symbol]['Position'].diff()))
-
+    backtest_dict[symbol]['Total_Returns'] = (1+ backtest_dict[symbol]['Strategy_Returns']).cumprod()
+    
     total_return = (1+ backtest_dict[symbol]['Strategy_Returns']).cumprod().iloc[-1]
     
     totals = totals + total_return
 
-    print(symbol, "Getiri:", total_return)
+    #print(symbol, "Getiri:", total_return)
 
-print("Toplam Getiri:", totals/len(symbols))
+result(backtest_dict,symbols,first_margin)
+
+#print("Toplam Getiri:", totals/len(symbols))
 
 
 
