@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import StrategyViewSet
+from .views import StrategyViewSet, strategy_page
 from . import views
 
 router = DefaultRouter()
@@ -15,7 +15,7 @@ urlpatterns = [
     #api
     path('api/', include(router.urls)),
     #----
-
+    path('strategies/', strategy_page, name='strategy_page'),
     path("", views.home),
     path("home", views.home, name = 'home'),
     path("backtest", views.backtest, name = 'Backtest'),

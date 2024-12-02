@@ -28,6 +28,9 @@ def mainmenu(request):
     }
     return render (request, 'mainmenu.html', context)
 
+def strategy_page(request):
+    return render(request, 'strategy.html')
+
 class StrategyViewSet(viewsets.ModelViewSet):
     queryset = Strategy.objects.all()
     serializer_class = StrategySerializer
