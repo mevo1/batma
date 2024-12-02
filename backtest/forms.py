@@ -1,5 +1,5 @@
 from django import forms
-from .models import Indicator
+from .models import Indicator, Strategy
 
 
 class IndicatorForm(forms.ModelForm):
@@ -19,3 +19,4 @@ class IndicatorForm(forms.ModelForm):
 
 class MyForm(forms.Form):
     input_text = forms.CharField(label='Yazınız', max_length=100)
+

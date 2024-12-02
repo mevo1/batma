@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import MyForm, IndicatorForm
-from .models import Indicator
+from .models import Indicator, Strategy
 from django.http import HttpResponseForbidden
 from django.contrib.auth.models import User
 import yfinance as yf
+from rest_framework import viewsets
+from .serializers import StrategySerializer
+
 
 coinler = ["bitcoin","ethereum","pepe"]
 range = ["1 yıl", "1 ay", "1 hafta"]
@@ -25,8 +28,9 @@ def mainmenu(request):
     }
     return render (request, 'mainmenu.html', context)
 
-def strategy(request):
-    return render(request, "strategy.html")
+class StrategyViewSet(viewsets.ModelViewSet):
+    queryset = Strategy.objects.all()
+    serializer_class = StrategySerializer
 
 def leftmenu(request):
     return render(request, "leftmenu.html")
