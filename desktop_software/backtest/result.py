@@ -7,13 +7,16 @@ def result(df,symbols,first_margin):
     
     process_count = process_count_fonks(df,symbols)
     profit_process_count = profit_process_count_fonks(df,symbols)
+    loss_process_count = loss_process_count_fonks(process_count,profit_process_count)
+    success_rate = success_rate_fonks(profit_process_count,loss_process_count)
     
     #print(df["BTC-USD"]["Position"])
     #print(df["BTC-USD"]["Cumprod"])
     #print(df["DOGE-USD"]["deger"])
-    #loss_process_count = 
+    
+    #loss_process_count
 
-    printer(last_margin,total_return,process_count,profit_process_count)
+    printer(last_margin,total_return,process_count,profit_process_count,loss_process_count,success_rate)
 
 
 def last_margin_fonks(df,symbols,first_margin):
@@ -39,17 +42,22 @@ def profit_process_count_fonks(df,symbols):
         df[symbol]["Last_Deger"] = ((df[symbol]["Position"] == 0) & (df[symbol]["Position"].shift(1) !=0)).shift(-1)
         df[symbol].loc[df[symbol].index[-1],"Last_Deger"] = df[symbol]["Position"].iloc[-1] != 0
 
-        count += df[symbol][(df[symbol]['Last_Deger'] == True) & (df[symbol]['Cumprod'] > 0)].shape[0]
+        count += df[symbol][(df[symbol]['Last_Deger'] == True) & (df[symbol]['Cumprod'] > 1)].shape[0]
 
     return count
 
+def loss_process_count_fonks(process_count,profit_process_count):
+    return process_count - profit_process_count
+
+def success_rate_fonks(profit_process_count,loss_process_count):
+    return profit_process_count/(loss_process_count+profit_process_count)*100
 
 
-
-
-def printer(last_margin,total_return,process_count,profit_process_count):
+def printer(last_margin,total_return,process_count,profit_process_count,loss_process_count,success_rate):
     print(f"Portföy Son Büyüklüğü: {last_margin:.0f} USD")
     print(f"Toplam Kar/Zarar:      {total_return:.0f} USD")
     print(f"Total İşlem Sayısı:    {process_count:.0f} ADET")
     print(f"Karlı İşlem Sayısı:    {profit_process_count:.0f} ADET")
+    print(f"Zararlı İşlem Sayısı:  {loss_process_count:.0f} ADET")
+    print(f"İşlem Başarı Oranı:    {success_rate:.0f} %")
 
