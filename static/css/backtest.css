@@ -1,69 +1,113 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
+  }
+  
+  .layout {
     display: flex;
-    height: 100vh; /* Consistent height definition */
-}
-
-.container2 {
-    display: flex;
-    align-items: right;
-    width: 50%; /* Ensure it spans the full width */
-}
-
-.sidebar2 {
-    width: 25%;
-    background-color: #333;
-    color: #fff;
+    height: 100vh;
+  }
+  
+  /* Sol Menü */
+  .sidebar {
+    width: 20%;
+    background-color: rgb(82, 158, 31);
+    color: white;
     padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .sidebar .profile {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 auto 10px;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu li {
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+  }
+  
+  .menu a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .menu a:hover {
+    color: #ddd;
+  }
+  
+  /* İçerik */
+  .content {
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.main-content1 {
-    flex-grow: 1;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.charts1 {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-}
-
-.chart1 {
-    width: 45%; /* Adjusted to fit two charts side by side */
-    background-color: #fff;
-    padding: 10px;
+    gap: 20px;
+    box-sizing: border-box;
+  }
+  
+  .chart-section {
+    flex: 2;
+    background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-}
-
-.control-panel1 {
     padding: 20px;
-    border-left: 1px solid #ddd;
-    background-color: #f8f8f8;
-    margin-top: 20px; /* Adjust spacing between elements */
-}
-
-.control-panel1 h3 {
-    margin-top: 0;
-}
-
-form label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-}
-
-form select,
-form button {
+  }
+  
+  .chart {
     width: 100%;
-    margin-bottom: 20px;
+    height: 200px;
+    background-color: hsla(0, 0%, 98%, 0.651);
+  }
+  
+  .controls-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+  }
+  
+  .controls-section label {
+    margin-top: 10px;
+  }
+  
+  .controls-section select,
+  .controls-section input {
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 100%;
+  }
+  
+  #backtestBtn {
     padding: 10px;
-}
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #backtestBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  .results {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  

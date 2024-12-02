@@ -5,31 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strateji Oluşturma</title>
     {% load static %}
-    <link rel="stylesheet" href="{%static 'css/strategy.css'%}">
-    
-     
+    <link rel="stylesheet" href="{% static 'css/strategy.css' %}">
 </head>
 <body>
     {% load static %}
-   
     <div class="container">
         <div class="sidebar">
             <div class="profile">
-                <div class="avatar"></div>
+                <div class="avatar" style="background-image: url('{% static "images/beluga.jpg" %}');"></div>
                 <p>#userr0085852800</p>
                 {% include 'leftmenu.html' %}
-        <div id="container1">
-            <div id="editor1">
+        <div id="container">
+            <div id="editor">
                 <div id="editor-header1">
-                    <input type="text" id="strategy-name" placeholder="Strateji adı girin..." value="Strateji_1">
+                    <input type="text" id="strategy-name" placeholder="Strateji adı girin..." value="Strateji Adı">
                     <button id="save-btn">Kaydet</button>
                 </div>
                 <textarea id="code-area" placeholder="Kodunuzu buraya yazın..."></textarea>
-                <div id="terminal1">
+                <div id="terminal">
                     <p>Terminal burada gösterilecek...</p>
                 </div>
             </div>
-            <div id="sidebar1">
+            <div id="sidebar">
                 <h3>Stratejilerim</h3>
                 <div id="strategies">
                     <!-- Kaydedilen stratejiler burada görünecek -->
@@ -37,6 +34,7 @@
             </div>
         </div>
     </div>
+</div>
     <script src="{% static 'js/strategy.js' %}"></script>
 </body>
 </html>

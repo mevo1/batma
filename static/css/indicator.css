@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#chart-container {
+    height: 75vh;
+    width: 65%;
+}
+
+#crypto-selector {
+    margin: 10px;
+    padding: 5px;
+    font-size: 1rem;
+    width: 200px;
+  }

@@ -1,7 +1,6 @@
-// Binance API'sinden fiyat verisi çekme
 const binanceAPI = 'https://api.binance.com/api/v3/klines';
-const symbol = 'BTCUSDT'; // Bitcoin/USDT çifti
-const interval = '1d'; // periyot
+const symbolAPI = 'https://api.binance.com/api/v3/ticker/price';
+let currentSymbol = 'BTCUSDT'; // Varsayılan Bitcoin/USDT
 
 // Grafik oluşturma
 const chartContainer = document.getElementById('chart-container');
@@ -28,11 +27,11 @@ const chart = LightweightCharts.createChart(chartContainer, {
 });
 const candleSeries = chart.addCandlestickSeries();
 
-// Binance API'den veri çek ve grafiğe yükle
-async function fetchData() {
+// Binance API'den veri çek ve grafiği güncelle
+async function fetchData(symbol = currentSymbol) {
     try {
         const response = await axios.get(binanceAPI, {
-            params: { symbol, interval, limit: 500 },
+            params: { symbol, interval: '4h', limit: 600 },
         });
         const data = response.data.map(([time, open, high, low, close]) => ({
             time: time / 1000,
@@ -47,5 +46,32 @@ async function fetchData() {
     }
 }
 
-fetchData();
-setInterval(fetchData, 60000); // Her dakika veriyi güncelle
+// Kripto para listesi oluştur
+async function populateCryptoSelector() {
+    try {
+        const response = await axios.get(symbolAPI);
+        const cryptoSelector = document.getElementById('crypto-selector');
+
+        response.data
+            .filter((coin) => coin.symbol.endsWith('USDT')) // Sadece USDT çiftlerini al
+            .slice(0, 200) // İlk 200 kripto para
+            .forEach((coin) => {
+                const option = document.createElement('option');
+                option.value = coin.symbol;
+                option.textContent = coin.symbol;
+                cryptoSelector.appendChild(option);
+            });
+
+        cryptoSelector.addEventListener('change', (e) => {
+            currentSymbol = e.target.value;
+            fetchData(currentSymbol); // Seçilen kripto para için grafiği güncelle
+        });
+    } catch (error) {
+        console.error('Kripto para listesi alınamadı:', error);
+    }
+}
+
+populateCryptoSelector(); // Seçici menüyü doldur
+fetchData(); // Varsayılan grafiği yükle
+setInterval(() => fetchData(currentSymbol), 60000); // Grafiği güncelle
+

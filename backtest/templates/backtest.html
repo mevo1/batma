@@ -1,55 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading Dashboard</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/backtest.css' %}">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backtest</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/backtest.css' %}">
+  <style>
+    .flex-row {
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
 </head>
+
 <body>
-    {% load static %}
-          
-    <div class="container2">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            {% include 'leftmenu.html' %}
+  <div class="layout">
+
+    {% load static %}  
+    <div class="sidebar">
+        <div class="profile">
+            <div class="avatar" style="background-image: url('{% static "images/beluga.jpg" %}');"></div>
+          <p>#userr0085852800</p>
+          {% include 'leftmenu.html' %}
+
+    <!-- İçerik -->
+    <div class="content">
+      <div class="chart-section">
+        <h3>Alım satım noktaları ve Portföy büyüklüğü</h3>
+        <div class="chart"></div>
+      </div>
+      <div class="controls-section">
+        <label for="crypto">Kripto para seçin:</label>
+        <select id="crypto">
+          {% include 'coinlist.html' %}
+        </select>
+
+        <label for="strategy">Strateji seçin:</label>
+        <select id="strategy">
+          <option value="strategy1">Strateji 1</option>
+          <option value="strategy2">Strateji 2</option>
+        </select>
+
+
+        <label for="period">Periyot seçin:</label>
+        <select id="period">
+          <option value="5min">5 dk</option>
+          <option value="15min">15 dk</option>
+          <option value="30min">30 dk</option>
+          <option value="1h">1 saat</option>
+          <option value="4h">4 saat</option>
+          <option value="1d">1 gün</option>
+        </select>
+
+        <label for="commission">Komisyon oranı giriniz:</label>
+        <input type="text" id="commission" placeholder="Komisyon oranı...">
+
+        <button id="backtestBtn">Backtest Yap</button>
+
+        <div class="results">
+            <small>
+                <p class="flex-row">Toplam kar-zarar: <span id="totalPL">%x</span></p>
+                <p class="flex-row">Açılan işlem sayısı: <span id="totalTrades">x</span></p>
+                <p class="flex-row">Karlı işlem sayısı: <span id="winningTrades">x</span></p>
+                <p class="flex-row">Zararlı işlem sayısı: <span id="losingTrades">x</span></p>
+                <p class="flex-row">Başarı oranı: <span id="successRate">%x</span></p>
+                <p class="flex-row">En karlı işlemdeki kar: <span id="maxProfit">%x</span></p>
+                <p class="flex-row">En zararlı işlemdeki zarar: <span id="maxLoss">%x</span></p>
+                <p class="flex-row">İşlemde kalınan ortalama süre: <span id="avgDuration">x gün</span></p>
+                <p class="flex-row">Stratejinin çalıştığı süre: <span id="strategyDuration">x gün</span></p>
+                <p class="flex-row">Stratejine 10 üzerinden verdiğimiz puan: <span id="rating">x</span></p>
+              </small>
+              
         </div>
-        <!-- Main Content -->
-        <div class="main-content2">
-            <div class="charts2">
-                <div class="chart2">
-                    <h3>Kâr Grafiği</h3>
-                    <canvas id="profitChart"></canvas>
-                </div>
-                <div class="chart">
-                    <h3>Alım-Satım Yeri</h3>
-                    <canvas id="tradeChart"></canvas>
-                </div>
-            </div>
-            <div class="control-panel2">
-                <h3>Veri Ayarları</h3>
-                <form id="settingsForm">
-                    <label for="pair">Verilik Seçin:</label>
-                    <select id="pair">
-                        <option>DOGEUSDT</option>
-                        <option>BTCUSDT</option>
-                    </select>
-                    <label for="strategy">Strateji:</label>
-                    <select id="strategy">
-                        <option>1</option>
-                        <option>2</option>
-                    </select>
-                    <label for="timeframe">Zaman Dilimi:</label>
-                    <select id="timeframe">
-                        <option>1 Saat</option>
-                        <option>4 Saat</option>
-                    </select>
-                    <button type="submit">Backtest Yap</button>
-                </form>
-            </div>
-        </div>
+      </div>
     </div>
+  
+  {% load static %}
+   <script src="{% static 'js/backtest.js' %}"></script>
 </body>
 </html>

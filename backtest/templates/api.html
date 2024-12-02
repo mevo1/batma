@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Hesabını Bağla</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/api.css'%}">
    
-    
 </head>
 <body>
   {% load static %}
-  
     <div class="container">
     <div class="sidebar">
         <div class="profile">
-          <div class="avatar"></div>
+          <div class="avatar" style="background-image: url('{% static "images/beluga.jpg" %}');"></div>
           <p>#userr0085852800</p>
           {% include 'leftmenu.html' %}
+
       <div class="main-content">
         <div class="header">
           <h2>API Bağlantı Paneli</h2>
         </div>
-  
         <div class="content">
           <div class="strategies">
             <h3>Kripto hesabınızın API adresini girin</h3>
@@ -48,5 +48,6 @@
         </div>
       </div>
     </div>
+        <script src="{% static 'js/api.js' %}"></script>
 </body>
 </html>
