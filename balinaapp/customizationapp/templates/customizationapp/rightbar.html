@@ -1,0 +1,18 @@
+<div id="sidebar-right" class="sidebar-right">
+    <div class="sidebar-header-right">
+        <h4 class="username-right">Indicator List</h4>
+    </div>
+    <ul class="sidebar-links-right" id="indicatorList">
+        <!--İNDİKATÖRLERİN LİSTESİ-->
+    </ul>
+
+    <!--YENİ İNDİKATÖR EKLEME (+) BUTONU-->
+    {% if request.resolver_match.url_name != 'indicator' %}
+    <div class="mt-3 text-center">
+        <button type="button" class="btn" class="text-decoration-none" style="background-color: #90EE90; color: white; border-color: #90EE90;" onclick="resetForm()">
+            +
+        </button>
+    </div>
+    {% endif %}
+</div>
+<button id="toggleSidebar-right" class="toggle-btn-right">☰</button>

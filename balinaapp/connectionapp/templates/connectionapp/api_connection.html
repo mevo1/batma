@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Hesabını Bağla</title>
+    <link rel="stylesheet" href="css/api.css">
+</head>
+<body>
+    <div class="main-content">
+        <div class="header">
+            <h2>API Bağlantı Paneli</h2>
+        </div>
+        <div class="content">
+            <div class="strategies">
+                <h3>Kripto hesabınızın API bilgilerini girin</h3>
+                <form id="apiForm">
+                    <input type="text" id="apiName" name="apiName" placeholder="API'ye bir isim verin" required>
+                    <input type="text" id="apiAddress" name="apiAddress" placeholder="API adresinizi buraya yazın" required>
+                    <input type="password" id="apiSecret" name="apiSecret" placeholder="API Secret Key'inizi buraya yazın" required>
+                    <button type="submit">Bağla</button>
+                </form>
+
+                <div id="connectedMessage" class="hidden">
+                    <div>✔️</div>
+                    <p>Hesabınız başarıyla bağlandı!</p>
+                </div>
+
+                <div id="actionButtons" class="hidden">
+                    <a href="strategy">
+                        <button>Hemen strateji oluştur</button>
+                    </a>
+                    <button id="disconnectButton">Bağlantıyı kes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

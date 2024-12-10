@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicator Management</title>
+    <style>
+        .indicator-list { width: 200px; float: right; }
+        .indicator-item { cursor: pointer; padding: 5px; }
+    </style>
+</head>
+<body>
+    <h2>Add New Indicator</h2>
+    <div>
+        <input type="text" id="title" placeholder="Enter title"><br><br>
+        <textarea id="code" placeholder="Code"></textarea><br><br>
+        <input type="checkbox" id="OnGraph"> On Graph<br><br>
+        <button onclick="saveIndicator()">Save</button>
+    </div>
+
+    <h2>Indicators</h2>
+    <div class="indicator-list" id="indicatorList">
+        <!-- Indicators will be listed here -->
+    </div>
+</body>
+</html>

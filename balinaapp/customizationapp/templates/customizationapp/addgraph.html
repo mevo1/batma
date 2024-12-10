@@ -1,0 +1,67 @@
+<div class="card shadow-sm">
+    <div class="card-body">
+        <!-- Dropdowns -->
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="d-flex justify-content-center mb-3">
+                <!-- Dropdown 1 -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Stock
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" value="select">
+                        {% for coin in coins%}
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu1', 'dropdown1', '{{coin.symbol}}', '{{coin.name}}')">{{coin.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <input type="hidden" name="stock" id="dropdown1">
+                </div>
+                <!-- Dropdown 2 -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Period
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '1d'   ,'1 Day')">1 Day</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '5d'   ,'5 Days')">5 Days</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '30d'  ,'1 Month')">1 Month</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '90d'  ,'3 Months')">3 Months</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '180d' ,'6 Months')">6 Months</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '365d'   ,'1 Year')">1 Year</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '730d'   ,'2 Years')">2 Years</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu2', 'dropdown2', '1825d'   ,'5 Years')">5 Years</a></li>
+                    </ul>
+                    <input type="hidden" name="period" id="dropdown2">
+                </div>
+
+                <!-- Dropdown 3 -->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu3" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Interval 
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '1m'  ,'1 Minutes')">1 Minutes</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '15m' ,'15 Minutes')">15 Minutes</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '30m' ,'30 Minutes')">30 Minutes</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '1h'  ,'1 Hour')">1 Hour</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '4h'  ,'4 Hours')">4 Hours</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '1d'  ,'1 Day')">1 Day</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSelection('dropdownMenu3', 'dropdown3', '1w'  ,'1 Week')">1 Week</a></li>
+                    </ul>
+                    <input type="hidden" name="interval" id="dropdown3">
+                </div>
+                <!-- Submit Button -->
+                <div class="text-center ms-3">
+                    <button type="button" class="btn btn-primary" name="action" value="draw" onclick="downloadData()">Draw</button>
+                </div>
+            </div>
+
+            
+        </form>
+
+        <!-- Chart -->
+        <div id="chart-container" class="w-100">
+            {{ chart|safe }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+#popup-container {
+    position: fixed;
+    top: 20px;
+    right: 40%;
+    z-index: 1000;
+}
+
+.popup {
+    background-color: #4caf50; /* Başarı mesajı için yeşil */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    animation: fadeOut 5s forwards;
+}
+
+.popup.error {
+    background-color: #f44336; /* Hata mesajı için kırmızı */
+}
+.popup.warning {
+    background-color: #ff9800; /* Uyarı mesajı için turuncu */
+}
+.popup.info {
+    background-color: #2196f3; /* Bilgi mesajı için mavi */
+}
+
+/* Animasyonla kaybolma */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
