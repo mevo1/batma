@@ -1,0 +1,70 @@
+{% extends "appbase.html" %} 
+{% load static %} 
+
+    {% block css_files %} 
+    <link rel="stylesheet" href="{% static 'homeapp/css/profilestyle.css' %}">
+    <link rel="stylesheet" href="{% static 'customizationapp/css/alert.css' %}">
+    {% endblock %} 
+
+    {% block topbar %} 
+    {% endblock %}
+
+    {% block content %} 
+    <div class="ms-5">
+        <div class="main-content">
+            <div class="header">
+                <h2>API Bağlantı Paneli</h2>
+            </div>
+            <div class="content">
+                <div class="strategies">
+                    <h3>Kripto hesabınızın API bilgilerini girin</h3>
+                    <form id="apiForm" action="api" method="POST">
+                        {% csrf_token %}
+                        <input type="text" id="apiName" name="api-name" placeholder="API name" required>
+                        <input type="text" id="apiAddress" name="api-address" placeholder="API address" required>
+                        <input type="password" id="apiSecret" name="api-secretkey" placeholder="API Secretkey" required>
+
+                        <button type="button" class="btn btn-primary" name="action" value="save" onclick="saveApi()">Bağla</button>
+                    </div>
+                    </form>
+
+                    <!-- <div id="connectedMessage" class="hidden">
+                        <div>✔️</div>
+                        <p>Hesabınız başarıyla bağlandı!</p>
+                    </div>
+
+                <div id="actionButtons" class="hidden">
+                    <a href="strategy">
+                        <button>Hemen strateji oluştur</button>
+                    </a>
+                    <button id="disconnectButton">Bağlantıyı kes</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% endblock %}  
+
+    {% block leftbar %} 
+        {% include "homeapp/leftbar.html" %}
+    {% endblock %} 
+
+    {% block alert %} 
+    <div id="custom-alert" class="hidden">
+        <span id="alert-message"></span>
+    </div>
+    {% endblock %}
+
+    {% block js_files %} 
+        <script src="{% static 'homeapp/js/leftbar.js' %}"></script>
+        <script src="{% static 'js/api-connection.js' %}"></script>
+        {% endblock %}
+
+
+
+
+
+
+
+   

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %} <link rel="stylesheet" href="{% static 'accountapp/css/style.css' %}"> {% endblock %}
+
+
+{% block topbar %}
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div class="container">
+        
+        {% include "accountapp/welcome_to_balina.html" %} <!-- Sol üstteki Welcome to Balina(link) -->
+
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link move-left" href="{% url 'register' %}">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Kullanıcı Giriş Formu -->
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Login</h2>
+            <hr>
+            <form action="{% url "login" %}" method="POST">
+                {% csrf_token %}
+                {% if error %}
+                <div class ="alert alert-danger">
+                    {{error}}
+                </div>
+                {% endif %}
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+
+        <!-- Kullanıcı İstatistikleri Modülü -->
+        <div class="col-md-3 statistics-module">
+            <h2>User Statistics</h2>
+            <div class="row">
+                <div class="col-md-12 mb-3 ">
+                    <div class="card text-white bg-info">
+                        <div class="card-body">
+                            <h6 class="card-title">Total Users</h6>
+                            <p class="card-text display-6">1,234</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="card text-white bg-success">
+                        <div class="card-body">
+                            <h6 class="card-title">Active Users</h6>
+                            <p class="card-text display-6">567</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <div class="card text-white bg-warning">
+                        <div class="card-body">
+                            <h6 class="card-title">Users Profited Last Month</h6>
+                            <p class="card-text display-6">566</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

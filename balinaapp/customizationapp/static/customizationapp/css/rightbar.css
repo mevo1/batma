@@ -1,0 +1,132 @@
+.sidebar-right {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #40be9c;
+    color: rgb(0, 0, 0);
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    z-index: 1000;
+    border-left: 2px solid black; /* Siyah kenarlık */
+    border-radius: 20px; /* Yuvarlak köşeler, sadece sağ üst ve alt köşeler */
+}
+
+.sidebar-right.open {
+    right: 0px;
+}
+
+/* Sidebar Header */
+.sidebar-header-right {
+    text-align: center;
+    padding: 8%;
+    margin-top: 0%;
+    margin-right: 10px;
+    border-bottom: 2px solid #041f4d;
+}
+
+.username-right {
+    font-size: 1.5em;
+    margin: 0;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Modern Sidebar Links */
+.sidebar-links-right {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 10px;
+}
+
+.sidebar-links-right li {
+    padding: 0.8em 1.2em;
+    border-bottom: 1px solid #082f72;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2em;
+    
+}
+
+.sidebar-links-right li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar-links-right li a:hover {
+    background-color: #0999af;
+    color: #ffdf91;
+}
+
+.sidebar-links-right li i {
+    font-size: 1.2em;
+}
+
+/* Toggle Button */
+.toggle-btn-right {
+    position: fixed;
+    top: 10px;
+    right: 25px;
+    background-color: #044c57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.4em;
+    cursor: pointer;
+    z-index: 1100;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-btn-right:hover {
+    background-color: #40be9c;
+}
+
+#indicatorList li.active {
+    background-color: #000000e1; /* Change this to your preferred color */
+    color: #ffffff; /* Text color */
+    border-radius: 10px; 
+}
+
+.delete-btn {
+    margin-top: 5px;
+    background-color: red;
+    width: 40px;
+    color: #ffffff;
+    border: 2px;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    position: absolute; /* KonumlandÄ±rmayÄ± mutlak hale getir */
+    right: 20px; /* SaÄŸ kenardan 10px mesafe */
+}
+
+.delete-btn:hover {
+    background-color: darkred;
+}
+
+.visible-btn {
+    margin-top: 5px;
+    background-color: rgb(13 121 210);
+    width: 60px;
+    color: #ededed;
+    border: 2px;
+    padding: 5px 5px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    position: absolute; /* KonumlandÄ±rmayÄ± mutlak hale getir */
+    right: 70px; /* SaÄŸ kenardan 10px mesafe */
+}
+
+.visible-btn:hover {
+    background-color: rgb(0 80 144);
+}

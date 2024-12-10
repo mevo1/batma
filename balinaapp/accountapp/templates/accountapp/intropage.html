@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block topbar %}
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+    <div class="container">
+        
+        {% include "accountapp/welcome_to_balina.html" %} <!-- Sol üstteki Welcome to Balina(link) -->
+
+
+        {% if user.is_authenticated %}
+            <a class="navbar-brand" href="#">Welcome, {{ user.first_name |title }}</a>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                </li>
+            </ul>
+        {% else %}
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center">Balina, sizin için dalganızı büyütür...</h1>
+    <p class="text-center">Balina hisse senetlerini siz takip etmeyin, siz yorulmayın diye var!</p>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Günün En Çok Artan Coinleri
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Bitcoin: +5%</li>
+                    <li class="list-group-item">Etherium: +3.7%</li>
+                    <li class="list-group-item">Dodge Coin: +2.5%</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    Günün En Çok Düşen Coinleri
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">DNX: -4.2%</li>
+                    <li class="list-group-item">IO: -3.9%</li>
+                    <li class="list-group-item">IDK: -3.5%</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

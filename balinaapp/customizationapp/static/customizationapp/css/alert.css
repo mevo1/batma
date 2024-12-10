@@ -1,0 +1,54 @@
+#custom-alert {
+    position: fixed;
+    top: 40px;
+    left: 40%;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: #f44336; /* Kırmızı arka plan */
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    max-width: 300px;
+    z-index: 1000;
+    opacity: 0;
+    display: none;
+    transform: translateY(-10px);
+    transition: opacity 1s ease, transform 1s ease;
+    text-align: center;
+}
+
+#custom-alert button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#custom-alert.visible {
+    opacity: 1;
+    display: block;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#custom-alert.success {
+    background-color: #4CAF50; /* Yeşil */
+}
+
+#custom-alert.warning {
+    background-color: #FF9800; /* Turuncu */
+}
+
+#custom-alert.error {
+    background-color: #ff0000; /* Turuncu */
+}
+
+#custom-alert.info {
+    background-color: #2196F3; /* Mavi */
+}

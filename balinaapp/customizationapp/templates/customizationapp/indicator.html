@@ -1,0 +1,49 @@
+{% extends "appbase.html" %} 
+{% load static %} 
+
+    {% block css_files %} 
+    <link rel="stylesheet" href="{% static 'homeapp/css/profilestyle.css' %}">
+    <link rel="stylesheet" href="{% static 'customizationapp/css/pop-up.css' %}">
+    <link rel="stylesheet" href="{% static 'customizationapp/css/rightbar.css' %}">
+    <link rel="stylesheet" href="{% static 'customizationapp/css/alert.css' %}">
+    {% endblock %} 
+
+    {% block topbar %} 
+    {% endblock %} 
+
+    {% block leftbar %} 
+        {% include "homeapp/leftbar.html" %}
+    {% endblock %} 
+
+    {% block rightbar %} 
+            {% include "customizationapp/rightbar.html" %} 
+    {% endblock %} 
+
+    {% block content %}
+        <div class="row">
+            <div class="col-md-4">
+                {% include "customizationapp/addindicator.html" %}
+            </div>
+            <div class="col-md-8">
+                {% include "customizationapp/addgraph.html" %}
+            </div>
+        </div>
+    {% endblock %} 
+
+    {% block alert %} 
+    <div id="custom-alert" class="hidden">
+        <span id="alert-message"></span>
+    </div>
+    {% endblock %}
+
+    {% block js_files %} 
+        <script>
+            const indicatorListUrl = "{% url 'list_indicators' %}";
+        </script>
+        <script src="{% static 'homeapp/js/leftbar.js' %}"></script>
+        <script src="{% static 'customizationapp/js/dropdown.js' %}"></script>
+        <script src="{% static 'customizationapp/js/graph.js' %}"></script>
+        <script src="{% static 'customizationapp/js/pop-up.js' %}"></script>
+        <script src="{% static 'customizationapp/js/indicator.js' %}"></script>
+        <script src="{% static 'customizationapp/js/rightbar.js' %}"></script>
+    {% endblock %}

@@ -1,0 +1,72 @@
+{% extends "appbase.html" %}
+{% load static %}
+
+{% block css_files %} 
+<link rel="stylesheet" href="{% static 'homeapp/css/profilestyle.css' %}">
+{% endblock %}
+
+{% block topbar %}
+{% endblock %}
+
+
+{% block leftbar %} 
+    {% include "homeapp/leftbar.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- İlk kutu: Stratejilerim -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    Botlarım
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Bot_1</li>
+                        <li class="list-group-item">Bot_2</li>
+                        <li class="list-group-item">Bot_3</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- İkinci kutu: Son İşlemler -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    Son İşlemler
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">BTC/USDT - Alış: 18:45</li>
+                        <li class="list-group-item">PEPE/USDT - Satış: 23:00</li>
+                        <li class="list-group-item">ETH/USDT - Alış: 15:30</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Üçüncü kutu: Portföy Performansı -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    Portföy Performansı
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Günlük: -%15</li>
+                        <li class="list-group-item">Haftalık: +%22</li>
+                        <li class="list-group-item">Aylık: +%265</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_files %}
+<script src="{% static 'homeapp/js/leftbar.js' %}"></script>
+{% endblock %}
