@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", loadApis);
+function loadApis() {
+    fetch("api/api/")
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            const list = document.getElementById("apiList");
+            list.innerHTML = "";
+            data.forEach((api, index) => {
+                list.innerHTML +=  `
+                <li>
+                    <a>
+                        <strong>${index + 1}.</strong> <!-- artan numara -->
+                        <i class="fas fa-chart-line"></i> ${api.name}
+                    </a>
+                </li>`;
+            });
+        });
+}
+
 let currentApiId = null;
 
 function saveApi() {
@@ -10,7 +30,8 @@ function saveApi() {
         : "/connection/api/apis/"; // Yeni ekleme için
 
     const method = currentApiId ? 'PUT' : 'POST';
-    //console.log(url,method)
+    console.log(url,method)
+    console.log(name,adress,secretkey)
     fetch(url, {
         method: method,
         headers: {
@@ -18,6 +39,7 @@ function saveApi() {
             'X-CSRFToken': getCSRFToken()
         },
         body: JSON.stringify({ name, adress, secretkey })
+        
     })
     
     .then(response => {
@@ -27,7 +49,7 @@ function saveApi() {
     .then(data => {
         //alert('Saved successfully.')
         showAlert(data.message, data.info);
-        //loadIndicators();
+        loadApis();
         //resetForm();
     })
     .catch(error => {
@@ -54,5 +76,5 @@ function showAlert(message, type = 'info') {
     // 5 saniye sonra otomatik kapat
     setTimeout(() => {
         alertBox.classList.remove('visible'); // Tüm sınıfları kaldır
-    }, 10000);
+    }, 2500);
 }
